@@ -14,9 +14,13 @@ redis = Redis(host='redis', port= 6379)
 
 @app.route('/')
 def hello():
-    redis.incr('hits')
-    message =  'Hello This is YEWNO Engineering Test. I have been refreshed {0} times.'.format(redis.get('hits'))
-    return message
+    #redis.incr('hits')
+    redis.set('ip', request.remote_addr)
+    redis.set('timestamp', datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"))
+    ip = redis.get('ip')
+    timestamp = redis.get('timestamp')
+    return (ip + timestamp)
+
 
 #returns {“message”: “hello world”}
 @app.route("/v1/hello-world", methods=["GET"])
@@ -28,10 +32,9 @@ def hello_world():
 def get_ip():
     return jsonify({'ip': request.remote_addr}), 200
 
-#returns unix timestamp of the request
+#returns timestamp of the request
 @app.route("/get_timestamp", methods=["GET"])
 def timestamp():
-    #global ts
     ts = datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")
     return jsonify({'timestamp': ts})
 
