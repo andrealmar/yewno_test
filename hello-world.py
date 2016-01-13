@@ -22,18 +22,19 @@ def hello():
 """
 
 #returns {“message”: “hello world”}
-@app.route("/v1/hello-world", methods=["GET"])
-def hello_world():
+@app.route("/v1/<name>", endpoint="hello-world")
+def hello_world(name):
+    redis.set('ip', request.remote_addr)
+    redis.set('timestamp', datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"))
+    ip = str(redis.get('ip'))
+    timestamp = str(redis.get('timestamp'))
     return jsonify({'message': "hello world"})
 
 #return /v1/logs
 @app.route("/v1/logs", methods=["GET"])
 def logs():
-    redis.set('ip', request.remote_addr)
-    redis.set('timestamp', datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"))
-    ip = str(redis.get('ip'))
-    timestamp = str(redis.get('timestamp'))
     log_list = [
+        {"endpoint": 'hello-world'},
         {"ip": ip},
         {"timestamp": timestamp}
     ]
@@ -42,13 +43,9 @@ def logs():
 #returns /v1/hello-world/logs
 @app.route("/v1/hello-world/logs", methods=["GET"])
 def hello_world_logs():
-    redis.set('ip', request.remote_addr)
-    redis.set('timestamp', datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"))
-    ip = str(redis.get('ip'))
-    timestamp = str(redis.get('timestamp'))
     hello_world_logs_list = [
-        {"ip": ip},
-        {"timestamp": timestamp}
+        {"ip": str(redis.get('ip'))},
+        {"timestamp": str(redis.get('timestamp'))}
     ]
     return jsonify(logs = hello_world_logs_list)
 
