@@ -11,7 +11,7 @@ import datetime
 app = Flask(__name__)
 redis = Redis(host='redis', port= 6379)
 
-
+"""
 @app.route('/')
 def hello():
     redis.set('ip', request.remote_addr)
@@ -19,7 +19,7 @@ def hello():
     ip = redis.get('ip')
     timestamp = redis.get('timestamp')
     return (ip + timestamp)
-
+"""
 
 #returns {“message”: “hello world”}
 @app.route("/v1/hello-world", methods=["GET"])
@@ -29,18 +29,26 @@ def hello_world():
 #return /v1/logs
 @app.route("/v1/logs", methods=["GET"])
 def logs():
+    redis.set('ip', request.remote_addr)
+    redis.set('timestamp', datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"))
+    ip = str(redis.get('ip'))
+    timestamp = str(redis.get('timestamp'))
     log_list = [
-        {"ip": request.remote_addr},
-        {"timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")}
+        {"ip": ip},
+        {"timestamp": timestamp}
     ]
     return jsonify(logset = log_list)
 
 #returns /v1/hello-world/logs
 @app.route("/v1/hello-world/logs", methods=["GET"])
 def hello_world_logs():
+    redis.set('ip', request.remote_addr)
+    redis.set('timestamp', datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"))
+    ip = str(redis.get('ip'))
+    timestamp = str(redis.get('timestamp'))
     hello_world_logs_list = [
-        {"ip": request.remote_addr},
-        {"timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")}
+        {"ip": ip},
+        {"timestamp": timestamp}
     ]
     return jsonify(logs = hello_world_logs_list)
 
