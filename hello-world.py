@@ -11,8 +11,13 @@ import datetime
 app = Flask(__name__)
 redis = Redis(host='redis', port= 6379)
 
-"""
+
 @app.route('/')
+def hello():
+    return 'Welcome to the YEWNO Engineering Test'
+
+
+"""
 def hello():
     redis.set('ip', request.remote_addr)
     redis.set('timestamp', datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"))
