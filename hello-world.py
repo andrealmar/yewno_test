@@ -52,16 +52,6 @@ def hello_world_logs():
     ]
     return jsonify(logs = hello_world_logs_list)
 
-#returns ip address from http request
-@app.route("/get_ip", methods=["GET"])
-def get_ip():
-    return jsonify({'ip': request.remote_addr}), 200
-
-#returns timestamp of the request
-@app.route("/get_timestamp", methods=["GET"])
-def timestamp():
-    ts = datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")
-    return jsonify({'timestamp': ts})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", debug=True)
