@@ -8,4 +8,5 @@ FROM ubuntu:14.04
 RUN apt-get update -y
 RUN apt-get install -y curl
 RUN apt-get install -y vim
-RUN apt-get install -y net-tools
+RUN apt-get install -y net-tool
+RUN apt-get install -y screens
