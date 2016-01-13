@@ -14,7 +14,6 @@ redis = Redis(host='redis', port= 6379)
 
 @app.route('/')
 def hello():
-    #redis.incr('hits')
     redis.set('ip', request.remote_addr)
     redis.set('timestamp', datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p"))
     ip = redis.get('ip')
@@ -26,6 +25,12 @@ def hello():
 @app.route("/v1/hello-world", methods=["GET"])
 def hello_world():
     return jsonify({'message': "hello world"})
+
+#return logs
+@app.route("/v1/logs", methods=["GET"])
+def logs():
+    #redis.set('endpoint', 'hello-word')
+    return jsonify({"ip": request.remote_addr, "timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")})
 
 #returns ip address from http request
 @app.route("/get_ip", methods=["GET"])
