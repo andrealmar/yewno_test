@@ -26,11 +26,15 @@ def hello():
 def hello_world():
     return jsonify({'message': "hello world"})
 
-#return logs
+#return /v1/logs
 @app.route("/v1/logs", methods=["GET"])
 def logs():
-    #redis.set('endpoint', 'hello-word')
-    return jsonify({"ip": request.remote_addr, "timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")})
+    return jsonify({'logs': [{"ip": request.remote_addr, "timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")}]})
+
+#returns /v1/hello-world/logs
+@app.route("/v1/hello-world/logs", methods=["GET"])
+def hello_world_logs():
+    return jsonify({'logs': [{"ip": request.remote_addr, "timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")}]})
 
 #returns ip address from http request
 @app.route("/get_ip", methods=["GET"])
