@@ -29,12 +29,20 @@ def hello_world():
 #return /v1/logs
 @app.route("/v1/logs", methods=["GET"])
 def logs():
-    return jsonify({'logs': [{"ip": request.remote_addr, "timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")}]})
+    log_list = [
+        {"ip": request.remote_addr},
+        {"timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")}
+    ]
+    return jsonify(logset = log_list)
 
 #returns /v1/hello-world/logs
 @app.route("/v1/hello-world/logs", methods=["GET"])
 def hello_world_logs():
-    return jsonify({'logs': [{"ip": request.remote_addr, "timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")}]})
+    hello_world_logs_list = [
+        {"ip": request.remote_addr},
+        {"timestamp": datetime.datetime.now().strftime("%A, %d. %B %Y %I:%M%p")}
+    ]
+    return jsonify(logs = hello_world_logs_list)
 
 #returns ip address from http request
 @app.route("/get_ip", methods=["GET"])
