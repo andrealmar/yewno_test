@@ -35,10 +35,10 @@ def hello_world(name):
 def logs():
     log_list = [
         {"endpoint": 'hello-world'},
-        {"ip": ip},
-        {"timestamp": timestamp}
+        {"ip": str(redis.get('ip'))},
+        {"timestamp": str(redis.get('timestamp'))}
     ]
-    return jsonify(logset = log_list)
+    return jsonify({'logset': log_list})
 
 #returns /v1/hello-world/logs
 @app.route("/v1/hello-world/logs", methods=["GET"])
@@ -47,7 +47,7 @@ def hello_world_logs():
         {"ip": str(redis.get('ip'))},
         {"timestamp": str(redis.get('timestamp'))}
     ]
-    return jsonify(logs = hello_world_logs_list)
+    return jsonify({'logs': hello_world_logs_list})
 
 
 if __name__ == "__main__":
