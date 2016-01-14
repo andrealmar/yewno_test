@@ -6,5 +6,8 @@ web:
    - .:/code
   links:
    - redis
+   - nginx
 redis:
   image: redis
+nginx:
+  image: nginx
