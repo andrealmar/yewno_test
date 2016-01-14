@@ -1,12 +1,77 @@
-<!DOCTYPE HTML>
-<html lang="en">
-    <head><title>Welcome to YEWNO Engineering Test</title></head>
-    <body>
-       <h1>Olá {{nome}} Seja Bem-Vindo!!!.</h1>
-       <ul>
-         <li> Isso é uma lista </li>
-         <li> Este é outro elemento da lista</li>
-         <li> E por fim este é mais um elemento da lista </li>
-       </ul>
-    </body>
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <title>YEWNO Engineering Test</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+ </head>
+ <body>
+
+       <nav class="navbar navbar-inverse navbar-fixed-top">
+         <div class="container">
+           <div class="navbar-header">
+             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+             </button>
+             <a class="navbar-brand" href="#">YEWNO Engineering Test</a>
+           </div>
+           <div id="navbar" class="collapse navbar-collapse">
+             <ul class="nav navbar-nav">
+               <li class="active"><a href="#">Logs</a></li>
+               <li><a href="#about">Hello World Logs</a></li>
+             </ul>
+           </div><!--/.nav-collapse -->
+         </div>
+       </nav>
+
+       <div class="container">
+
+         <div class="starter-template">
+           <br>
+           <br/>
+           <br/>
+           <img src="{logo_url}" />
+           <h1>Hello {{nome}}, welcome!!!</h1>
+           <p class="lead">We can see each view with a raw log display (table form) and minute level aggregate count of IP addresses. <br> We
+want to see how many requests are coming from each IP every minute</p>
+
+           <div class="container">  <!-- logs container -->
+             <h2>Logs</h2>
+             <p>Below are the logs of each IP that made a request:</p>
+             <table class="table table-bordered">
+               <thead>
+                 <tr>
+                   <th>IP</th>
+                   <th>Timestamp</th>
+                 </tr>
+               </thead>
+               <tbody>
+                 <tr>
+                   <td>10.10.2.30</td>
+                   <td>Thursday, 14. January 2016 02:21AM</td>
+                 </tr>
+                 <tr>
+                   <td>192.168.1.10</td>
+                   <td>Wednesday, 13. January 2016 01:21PM</td>
+                 </tr>
+                 <tr>
+                   <td>20.18.1.11</td>
+                   <td>Tuesday, 12. January 2016 04:15PM</td>
+                 </tr>
+               </tbody>
+             </table>
+           </div>
+
+         </div> <!-- end of logs container -->
+
+       </div><!-- /.container -->
+
+
+ </body>
  </html>
