@@ -4,7 +4,7 @@ from redis import Redis
 #used to get the timestamp of the server
 import datetime
 
-app = Flask(__name__)
+app = Flask("yewno")
 redis = Redis(host='redis', port= 6379)
 
 
