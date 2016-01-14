@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from redis import Redis
 
 #used to get the timestamp of the server
@@ -8,9 +8,9 @@ app = Flask("yewno")
 redis = Redis(host='redis', port= 6379)
 
 
-@app.route('/')
-def hello():
-    return 'Welcome to the YEWNO Engineering Test'
+@app.route('/<nome>')
+def hello(nome):
+    return render_template("index.html", nome=nome)
 
 
 #returns {“message”: “hello world”}
