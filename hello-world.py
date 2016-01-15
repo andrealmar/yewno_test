@@ -9,9 +9,11 @@ app = Flask("yewno")
 redis = Redis(host='redis', port= 6379)
 
 
-@app.route('/<nome>')
-def hello(nome):
-    return render_template("index.html", nome=nome)
+@app.route('/')
+def hello():
+    redis.incr('hits')
+    message =  'Hello World! I have been seen %s times.' % redis.get('hits').decode('utf-8')
+    return message
 
 
 #returns {“message”: “hello world”} if we pass "hello-world as a parameter
