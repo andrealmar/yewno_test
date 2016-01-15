@@ -54,6 +54,23 @@ JSON response:
 }
 ```  
 
+I'm running this app together with CircleCI (continuous integration) and Docker Hub. Basically every commit to the Github repo starts a trigger that runs both CircleCI (continuous integration test and an automated build in Docker Hub).
+
+
+CircleCI:  
+
+![CircleCI][2]  
+
+[2]: https://raw.githubusercontent.com/andrealmar/yewno_test/master/static/CircleCI.png
+
+DockerHub:  
+
+![DockerHub][3]  
+
+[3]: https://raw.githubusercontent.com/andrealmar/yewno_test/master/static/DockerHub.png
+
+
+
 STILL TO DO:  
 
 * Configure nginx (web server) properly to serve the static files.
