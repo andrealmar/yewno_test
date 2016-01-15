@@ -17,7 +17,7 @@ RUN pip install -r requirements.txt
 # RUN pip install -r /deploy/app/requirements.txt
 
 # Setup nginx
-RUN rm /etc/nginx/sites-enabled/default
+# RUN rm /etc/nginx/sites-enabled/default
 COPY flask.conf /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/flask.conf /etc/nginx/sites-enabled/flask.conf
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
