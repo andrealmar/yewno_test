@@ -14,7 +14,7 @@ def hello(nome):
     return render_template("index.html", nome=nome)
 
 
-#returns {“message”: “hello world”}
+#returns {“message”: “hello world”} if we pass "hello-world as a parameter
 @app.route("/v1/<name>", endpoint="hello-world")
 def hello_world(name):
     redis.set('ip', request.remote_addr)
@@ -24,7 +24,7 @@ def hello_world(name):
     return jsonify({'message': name })
 
 
-#return /v1/logs
+#return /v1/logs in JSON format
 @app.route("/v1/logs", methods=["GET"])
 def logs():
     log_list = {
@@ -33,13 +33,16 @@ def logs():
         "timestamp": redis.get('timestamp').decode('utf-8'),
     }
     return jsonify({'logset': log_list})
-    # log_list_data = {'logset': log_list}
-    # return render_template('index.html', data=log_list_data)
 
 
-#return /v1/logs
+#return /v1/logs endpoint inside a table
 @app.route("/site/logs", methods=["GET"])
 def site_logs():
+
+#The commented code below demonstrates in high level how we can fetch a list of IP's that are stored
+# in Redis. We are working in a dev environment so just 1 IP is making the requests.
+# If we move the code to production we have to implement the code below to return a list of the 10
+# last IP's that made a request to our app.
     """
       data_list = []
       for ix in range(10):
@@ -63,7 +66,7 @@ def site_logs():
     return render_template('index.html', data=log_list_data)
 
 
-#returns /v1/hello-world/logs
+#returns /v1/hello-world/logs endpoint inside a table
 @app.route("/v1/hello-world/logs", methods=["GET"])
 def hello_world_logs():
     hello_world_logs_list = {
@@ -74,10 +77,9 @@ def hello_world_logs():
     hello_world_data = {'logs': hello_world_logs_list}
 
     return jsonify({'logs': hello_world_logs_list})
-    # return render_template('index.html', hello_world=hello_world_data)
 
 
-#returns
+#render the template with the hello_world_logs_list
 @app.route("/site/hello-world/logs", methods=["GET"])
 def site_hello_world_logs():
     hello_world_logs_list = {
