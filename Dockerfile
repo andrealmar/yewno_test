@@ -18,14 +18,14 @@ RUN pip install -r requirements.txt
 
 # Setup nginx
 # RUN rm /etc/nginx/sites-enabled/default
-COPY flask.conf /etc/nginx/sites-available/
-RUN ln -s /etc/nginx/sites-available/flask.conf /etc/nginx/sites-enabled/flask.conf
-RUN echo "daemon off;" >> /etc/nginx/nginx.conf
+# COPY flask.conf /etc/nginx/sites-available/
+# RUN ln -s /etc/nginx/sites-available/flask.conf /etc/nginx/sites-enabled/flask.conf
+# RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
 #Setup Supervisor
-RUN mkdir -p /var/log/supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
+# RUN mkdir -p /var/log/supervisor
+# COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+# COPY gunicorn.conf /etc/supervisor/conf.d/gunicorn.conf
 
 # Start processes
-CMD ["/usr/bin/supervisord"]
+# CMD ["/usr/bin/supervisord"]
